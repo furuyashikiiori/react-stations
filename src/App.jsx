@@ -3,6 +3,7 @@
 import './App.css'
 import { Header } from './Header'
 import { Description } from './Description'
+import { DogListContainer } from './DogListContainer'
 
 /**
  * @type {() => JSX.Element}
@@ -10,6 +11,7 @@ import { Description } from './Description'
 export const App = () => {
   return (
     <>
+      <DogListContainer></DogListContainer>
       <Header></Header>
       <Description></Description>
     </>
