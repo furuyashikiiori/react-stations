@@ -1,12 +1,12 @@
 // @ts-check
 import React from 'react'
 
-const BreedsSelect = props => {
+export const BreedsSelect = props => {
   return (
     <>
       <select>
         {props.breeds.map((breed, index) => {
-          return <option key={index}>{breed}</option>
+          return <option>{breed}</option>
         })}
       </select>
     </>
