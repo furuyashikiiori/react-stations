@@ -17,7 +17,7 @@ export const DogListContainer = () => {
       .then(res => res.json())
       .then(dogData => {
         setbreeds(dogData.message)
-        console.log(dogData.message) // 更新された値を確認
+        // console.log(dogData.message) // 更新された値を確認
       })
   }, [])
 
