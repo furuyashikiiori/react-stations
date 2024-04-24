@@ -2,10 +2,14 @@
 import { useEffect } from 'react'
 import { useState } from 'react'
 import BreedsSelect from './BreedsSelect'
+import DogImage from './DogImage'
 
 export const DogListContainer = () => {
   const [breeds, setbreeds] = useState([])
   const [selectedBreed, setSelectedBreed] = useState()
+
+  const [pictureBreed, setpictureBreed] = useState([])
+  const a = 1
 
   // @ts-ignore
   const handleSelectChange = e => {
@@ -20,6 +24,24 @@ export const DogListContainer = () => {
         // console.log(dogData.message) // 更新された値を確認
       })
   }, [])
+  const dogpic = () => {
+    let texturl = 'https://dog.ceo/api/breed/'
+    texturl += selectedBreed
+    texturl += '/images/random/12'
+    console.log('dogpic : ' + texturl)
+    fetch(texturl)
+      .then(response => {
+        return response.json()
+      })
+      .then(data => {
+        setpictureBreed(data.message)
+        console.log(pictureBreed)
+      })
+  }
+
+  const dog_picture = () => {
+    dogpic()
+  }
 
   return (
     <>
@@ -28,6 +50,10 @@ export const DogListContainer = () => {
         selectedBreed={selectedBreed}
         onChange={handleSelectChange}
       />
+      <button onClick={dog_picture}>表示する</button>
+      {pictureBreed.map((list, key) => (
+        <DogImage imageUrl={list} key={key} />
+      ))}
     </>
   )
 }
