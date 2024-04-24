@@ -7,6 +7,11 @@ export const DogListContainer = () => {
   const [breeds, setbreeds] = useState([])
   const [selectedBreed, setSelectedBreed] = useState()
 
+  // @ts-ignore
+  const handleSelectChange = e => {
+    setSelectedBreed(e.target.value)
+  }
+
   useEffect(() => {
     fetch('https://dog.ceo/api/breeds/list/all')
       .then(res => res.json())
@@ -18,7 +23,11 @@ export const DogListContainer = () => {
 
   return (
     <>
-      <BreedsSelect breeds={breeds} />
+      <BreedsSelect
+        breeds={breeds}
+        selectedBreed={selectedBreed}
+        onChange={handleSelectChange}
+      />
     </>
   )
 }
