@@ -19,6 +19,7 @@ export const Description = () => {
   return (
     <>
       <div className="allthing">
+        <button>表示</button>
         <p>犬の画像を表示するサイト！</p>
         <button onClick={ChangeClick}>更新</button>
         <DogImage url={dogUrl}></DogImage>

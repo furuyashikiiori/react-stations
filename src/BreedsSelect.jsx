@@ -12,7 +12,7 @@ import React from 'react'
 //     </>
 //   )
 // }
-
+// @ts-check
 export const BreedsSelect = ({ breeds, selectedBreed, onChange }) => {
   const dogs = Object.keys(breeds).map(key => (
     <option value={key} key={key}>
