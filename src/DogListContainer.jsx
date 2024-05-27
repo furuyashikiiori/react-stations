@@ -1,12 +1,12 @@
-import { useEffect } from 'react'
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import BreedsSelect from './BreedsSelect'
 import DogImage from './DogImage'
+import './App.css' // CSSファイルをインポート
 
 export const DogListContainer = () => {
-  const [breeds, setbreeds] = useState([])
+  const [breeds, setBreeds] = useState({})
   const [selectedBreed, setSelectedBreed] = useState('')
-  const [pictureBreed, setpictureBreed] = useState([])
+  const [pictureBreed, setPictureBreed] = useState([])
 
   const handleSelectChange = e => {
     setSelectedBreed(e.target.value)
@@ -16,28 +16,18 @@ export const DogListContainer = () => {
     fetch('https://dog.ceo/api/breeds/list/all')
       .then(res => res.json())
       .then(dogData => {
-        setbreeds(dogData.message)
+        setBreeds(dogData.message)
       })
   }, [])
 
-  useEffect(() => {
+  const fetchImages = () => {
     if (selectedBreed) {
-      fetchImages(selectedBreed)
-    }
-  }, [selectedBreed])
-
-  const fetchImages = breed => {
-    const url = `https://dog.ceo/api/breed/${breed}/images/random/12`
-    fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        setpictureBreed(data.message)
-      })
-  }
-
-  const handleButtonClick = () => {
-    if (selectedBreed) {
-      fetchImages(selectedBreed)
+      const url = `https://dog.ceo/api/breed/${selectedBreed}/images/random/21`
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          setPictureBreed(data.message)
+        })
     }
   }
 
@@ -48,10 +38,14 @@ export const DogListContainer = () => {
         selectedBreed={selectedBreed}
         onChange={handleSelectChange}
       />
-      <button onClick={handleButtonClick}>表示します</button>
-      {pictureBreed.map((url, key) => (
-        <DogImage url={url} key={key} />
-      ))}
+      <button onClick={fetchImages}>表示します</button>
+      <div className="dog-list-container">
+        {pictureBreed.map((url, key) => (
+          <div className="dog-image-wrapper" key={key}>
+            <DogImage url={url} />
+          </div>
+        ))}
+      </div>
     </>
   )
 }

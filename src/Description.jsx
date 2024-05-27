@@ -1,4 +1,3 @@
-// @ts-check
 import React, { useState } from 'react'
 import DogImage from './DogImage'
 
@@ -12,16 +11,18 @@ export const Description = () => {
     const img = await data.json()
     return img.message
   }
+
   const ChangeClick = async () => {
     const imageUrl = await change()
     setDogUrl(imageUrl)
   }
+
   return (
     <>
       <div className="allthing">
         <p>犬の画像を表示するサイト！</p>
         <button onClick={ChangeClick}>更新</button>
-        <DogImage url={dogUrl}></DogImage>
+        <DogImage url={dogUrl} />
       </div>
     </>
   )

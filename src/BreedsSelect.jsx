@@ -1,28 +1,14 @@
-// @ts-check
 import React from 'react'
 
-// export const BreedsSelect = props => {
-//   return (
-//     <>
-//       <select>
-//         {props.breeds.map((breed, index) => {
-//           return <option>{breed}</option>
-//         })}
-//       </select>
-//     </>
-//   )
-// }
 // @ts-check
 export const BreedsSelect = ({ breeds, selectedBreed, onChange }) => {
-  const dogs = Object.keys(breeds).map(key => (
-    <option value={key} key={key}>
-      {key}
-    </option>
-  ))
-  alert(dogs)
   return (
     <select value={selectedBreed} onChange={onChange}>
-      {dogs}
+      {Object.keys(breeds).map(breed => (
+        <option value={breed} key={breed}>
+          {breed}
+        </option>
+      ))}
     </select>
   )
 }

@@ -1,12 +1,8 @@
-// @ts-check
-
 export const Header = () => {
   return (
-    <>
-      <header className="react_header">
-        <h1>初めてのReact</h1>
-      </header>
-    </>
+    <header className="react_header">
+      <h1>初めてのReact</h1>
+    </header>
   )
 }
 

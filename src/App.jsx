@@ -1,5 +1,3 @@
-// DO NOT DELETE
-
 import './App.css'
 import { Header } from './Header'
 import { Description } from './Description'
@@ -11,9 +9,11 @@ import { DogListContainer } from './DogListContainer'
 export const App = () => {
   return (
     <>
-      <Header></Header>
-      <Description></Description>
-      <DogListContainer></DogListContainer>
+      <Header />
+      <Description />
+      <DogListContainer />
     </>
   )
 }
+
+export default App
