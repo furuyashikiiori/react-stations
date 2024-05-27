@@ -11,9 +11,9 @@ import { DogListContainer } from './DogListContainer'
 export const App = () => {
   return (
     <>
-      <DogListContainer></DogListContainer>
       <Header></Header>
       <Description></Description>
+      <DogListContainer></DogListContainer>
     </>
   )
 }

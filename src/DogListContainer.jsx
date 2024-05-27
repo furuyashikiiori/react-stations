@@ -1,4 +1,3 @@
-// @ts-check
 import { useEffect } from 'react'
 import { useState } from 'react'
 import BreedsSelect from './BreedsSelect'
@@ -6,12 +5,9 @@ import DogImage from './DogImage'
 
 export const DogListContainer = () => {
   const [breeds, setbreeds] = useState([])
-  const [selectedBreed, setSelectedBreed] = useState()
-
+  const [selectedBreed, setSelectedBreed] = useState('')
   const [pictureBreed, setpictureBreed] = useState([])
-  const a = 1
 
-  // @ts-ignore
   const handleSelectChange = e => {
     setSelectedBreed(e.target.value)
   }
@@ -21,26 +17,28 @@ export const DogListContainer = () => {
       .then(res => res.json())
       .then(dogData => {
         setbreeds(dogData.message)
-        // console.log(dogData.message) // 更新された値を確認
       })
   }, [])
-  const dogpic = () => {
-    let texturl = 'https://dog.ceo/api/breed/'
-    texturl += selectedBreed
-    texturl += '/images/random/12'
-    console.log('dogpic : ' + texturl)
-    fetch(texturl)
-      .then(response => {
-        return response.json()
-      })
+
+  useEffect(() => {
+    if (selectedBreed) {
+      fetchImages(selectedBreed)
+    }
+  }, [selectedBreed])
+
+  const fetchImages = breed => {
+    const url = `https://dog.ceo/api/breed/${breed}/images/random/12`
+    fetch(url)
+      .then(response => response.json())
       .then(data => {
         setpictureBreed(data.message)
-        console.log(pictureBreed)
       })
   }
 
-  const dog_picture = () => {
-    dogpic()
+  const handleButtonClick = () => {
+    if (selectedBreed) {
+      fetchImages(selectedBreed)
+    }
   }
 
   return (
@@ -50,9 +48,9 @@ export const DogListContainer = () => {
         selectedBreed={selectedBreed}
         onChange={handleSelectChange}
       />
-      <button onClick={dog_picture}>表示する</button>
-      {pictureBreed.map((list, key) => (
-        <DogImage imageUrl={list} key={key} />
+      <button onClick={handleButtonClick}>表示します</button>
+      {pictureBreed.map((url, key) => (
+        <DogImage url={url} key={key} />
       ))}
     </>
   )
